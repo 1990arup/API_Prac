@@ -1,7 +1,14 @@
 from flask import Flask, request, jsonify
 
-def sum(a,b):
-    return a+b
+app= Flask(__name__)
+@app.route('/abc',methods=['GET','POST'])
 
-x= sum(4,5)
-print(x)
+def test1():
+    if(request.method=='POST'):
+        a= request.json['num1']
+        b= request.json['num2']
+        result= a + b
+        return jsonify((str(result)))
+
+if __name__=='__main__':
+    app.run()
