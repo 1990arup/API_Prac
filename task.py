@@ -18,5 +18,13 @@ def insert():
         mydb.commit()
         return jsonify(str('succesfully inserted'))
 
+@app.route('/update',methods=['POST'])
+def update():
+    if request.method == 'POST':
+        get_name=request.json['get_name']
+        cursor.execute("update taskdb.mysqltable set number=number+500 where name = %s",(get_name,))
+        mydb.commit()
+        return jsonify(str('Updated successfully'))
+
 if __name__=='__main__':
     app.run()
